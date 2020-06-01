@@ -19,7 +19,7 @@ Quick-and-dirty demos to verify some ideas and techniques of my hime 2d game eng
 
 与[BunnyMarkGame](https://github.com/re-esper/BunnyMarkGame)不同的是, hime2d实验代码的图形管线和cocos2d-x完全一致, shader完全一致, 也基本实现了相同的2D精灵功能, 部分缺失的功能不会对性能产生明显影响
 
-测试环境, Intel Core i7-7700K + 核显HD 630, 渲染部分在独显或者安卓上比起cocos2d-x会有更大优势, 然而我的显卡坏了- -||
+测试环境: Intel Core i7-7700K + 核显HD 630, 渲染部分在独显或者安卓上比起cocos2d-x会有更大优势, 然而我的显卡坏了- -||
 
 ## Results
 
