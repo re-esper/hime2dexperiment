@@ -34,3 +34,12 @@ Intel Core i7-7700K + Intel HD 630
 | **Ratio**    | **16.8x**     | **11.3x**    | **7.0x**     | **9.2x**     |
 
 <img src="https://github.com/re-esper/hime2dexperiment/blob/master/pics/hime2dlua.png" width="50%" height="50%"> 
+
+### 性能优势来源
+1. 激进的 ``data-oriented`` 设计  
+尽管2D游戏引擎高度依赖父子层级以及z-order顺序, 通常被认为并不适合做data-oriented, 但hime2d还是用比一般ECS更为平坦的结构实现了2D游戏所有功能, 并尽可能保持性能收益  
+请参考 [World.cpp](https://github.com/re-esper/hime2dexperiment/blob/master/hime2dbunnymark/hime2d/World.cpp) / [World.h](https://github.com/re-esper/hime2dexperiment/blob/master/hime2dbunnymark/hime2d/World.h)
+2. 在拥有非面向对象api的基础上, 采用``luajit ffi``做binding, 大大提升了绑定层的性能  
+由于没有C++对象, 没有引用计数, 即使在不能通过ffi获得性能提升的iOS平台, 退化的lua c api绑定也会远比cocos2d-x的绑定层更快
+
+
