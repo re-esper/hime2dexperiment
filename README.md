@@ -23,7 +23,7 @@ Quick-and-dirty demos to verify some ideas and techniques of my hime 2d game eng
 ### 测试环境
 
 Intel Core i7-7700K + Intel HD 630  
-渲染部分在独显或者安卓上比起cocos2d-x会有更大优势, 然而我的显卡坏了- -||
+渲染部分在**独显**或者**安卓**上比起cocos2d-x会有更大优势, 然而我的显卡坏了- -||
 
 ## 结果
 
@@ -32,3 +32,5 @@ Intel Core i7-7700K + Intel HD 630
 | hime2d   | **370,000**     | **170,000**     | **400,000**     | **170,000**     |
 | cocos2d-x    | 22,000     | 15,000    | 57,000     | 18,500     |
 | **Ratio**    | **16.8x**     | **11.3x**    | **7.0x**     | **9.2x**     |
+
+<img src="https://github.com/re-esper/hime2dexperiment/blob/master/pics/hime2dlua.png" width="50%" height="50%"> 
