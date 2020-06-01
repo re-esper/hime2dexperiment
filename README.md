@@ -4,7 +4,7 @@ Quick-and-dirty demos to verify some ideas and techniques of my hime 2d game eng
 
 ## Hime 2D Bunnymark
 
-分别用hime2d实验代码的C++与Lua接口实现标准bunnymark, 并和cocos2d-x的C++与Lua版本实现的标准bunnymark比较性能
+分别用hime2d实验代码的C++与Lua接口实现标准bunnymark, 并和cocos2d-x的C++与Lua版本的bunnymark比较性能
 
 主要比较**非渲染**部分的性能
 
