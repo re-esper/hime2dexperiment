@@ -12,7 +12,7 @@ Quick-and-dirty demos to verify some ideas and techniques of my hime 2d game eng
 
 ## 说明
 
-对于him2d版本, 以下宏定义位于[hime2d.h](https://github.com/re-esper/hime2dexperiment/blob/master/hime2dbunnymark/hime2d/hime2d.h):  
+对于hime2d版本, 以下宏定义位于[hime2d.h](https://github.com/re-esper/hime2dexperiment/blob/master/hime2dbunnymark/hime2d/hime2d.h):  
 宏定义``HIME2D_LUA`` 切换使用Lua逻辑或C++逻辑  
 宏定义``NORENDER`` 切换是否关闭精灵渲染
 
