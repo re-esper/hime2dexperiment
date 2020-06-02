@@ -317,7 +317,7 @@ void World::update(float deltaTime)
         _renderOrder.clear();
         _renderOrder.reserve(_maxId);
         for (Id idx = 0; idx < _maxId; ++idx) {
-            if ((e_signatures[idx] & 0xFFFFFF) == e_type::sprite && (e_states[idx] & e_state::hidden) == 0) {
+            if ((e_signatures[idx] & 0xFFFFFF) == e_type::sprite) {
                 _renderOrder.push_back(idx);
             }
         }
@@ -330,7 +330,10 @@ void World::update(float deltaTime)
 #ifndef NORENDER
     // finally, render them all by order!!
     for (auto idx : _renderOrder) {
-        SpriteBatchRender::renderSprite(0, e_vertices[idx]);
+        // TODO: Test good or not that 'entity_delete' makes render order dirty
+        if ((e_states[idx] & e_state::hidden) == 0 && (e_signatures[idx] & 0xFFFFFF) != e_type::none) {
+            SpriteBatchRender::renderSprite(0, e_vertices[idx]);
+        }
     }
     SpriteBatchRender::flush();
 #endif
