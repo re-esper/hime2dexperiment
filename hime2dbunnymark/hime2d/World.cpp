@@ -85,7 +85,7 @@ inline void _entity_init(Id index, uint8_t signature, uint32_t type)
     e_signatures[index] = ((uint32_t)signature << 24) | type;
     e_parents[index] = index; // no parents
     e_transforms[index] = {
-        glm::vec3(0, 0, 0), // position
+        glm::vec2(0, 0), // position
         0,                  // rotation
         glm::vec2(1, 1),    // scale
     };
