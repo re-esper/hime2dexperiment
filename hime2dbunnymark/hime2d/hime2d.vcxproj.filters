@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="bindings.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SpriteBatchRender.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="..\external\imgui\imgui.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_draw.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_widgets.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanAndroid.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanDebug.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanFramework.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanMemoryAllocator.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanTools.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VulkanUIOverlay.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bindings.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="hime2d.h" />
+    <ClInclude Include="macros.h" />
+    <ClInclude Include="SpriteBatchRender.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="World.h" />
+    <ClInclude Include="renderer\keycodes.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanAndroid.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanBuffer.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanDebug.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanDevice.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanFramework.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanInitializers.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanSwapChain.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanTexture.hpp">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanTools.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VulkanUIOverlay.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{f7e9cfd9-7c45-47b8-9280-29063ce43484}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

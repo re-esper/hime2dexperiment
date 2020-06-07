@@ -37,7 +37,6 @@
 #include "VulkanTools.h"
 #include "volk/volk.h"
 
-#include "keycodes.hpp"
 
 #include "VulkanDebug.h"
 #include "VulkanUIOverlay.h"
@@ -45,7 +44,6 @@
 #include "VulkanInitializers.hpp"
 #include "VulkanDevice.hpp"
 #include "VulkanSwapChain.hpp"
-#include "camera.hpp"
 
 class VulkanFramework
 {
@@ -152,8 +150,6 @@ public:
 
 	VkClearColorValue defaultClearColor = { { 0.0f, 0.0f, 0.0f, 1.0f } };
 
-	float zoom = 0;
-
 	static std::vector<const char*> args;
 
 	// Defines a frame rate independent timer value clamped from -1.0...1.0
@@ -164,15 +160,6 @@ public:
 	
 	bool paused = false;
 
-	// Use to adjust mouse rotation speed
-	float rotationSpeed = 1.0f;
-	// Use to adjust mouse zoom speed
-	float zoomSpeed = 1.0f;
-
-	Camera camera;
-
-	glm::vec3 rotation = glm::vec3();
-	glm::vec3 cameraPos = glm::vec3();
 	glm::vec2 mousePos;
 
 	std::string title = "";

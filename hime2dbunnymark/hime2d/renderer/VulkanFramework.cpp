@@ -7,6 +7,7 @@
 */
 
 #include "VulkanFramework.h"
+#include "keycodes.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
@@ -223,10 +224,6 @@ void VulkanFramework::renderFrame()
     auto tEnd = std::chrono::high_resolution_clock::now();
     auto tDiff = std::chrono::duration<double, std::milli>(tEnd - tStart).count();
     frameDeltaTime = (float)tDiff / 1000.0f;
-    camera.update(frameDeltaTime);
-    if (camera.moving()) {
-        viewUpdated = true;
-    }
 
     // Convert to clamped timer value
     if (!paused) {
@@ -300,7 +297,6 @@ void VulkanFramework::renderLoop()
             auto tEnd = std::chrono::high_resolution_clock::now();
             auto tDiff = std::chrono::duration<double, std::milli>(tEnd - tStart).count();
             frameDeltaTime = tDiff / 1000.0f;
-            camera.update(frameDeltaTime);
             // Convert to clamped timer value
             if (!paused) {
                 timer += timerSpeed * frameDeltaTime;
@@ -323,41 +319,6 @@ void VulkanFramework::renderLoop()
             // Check touch state (for movement)
             if (touchDown) {
                 touchTimer += frameDeltaTime;
-            }
-            if (touchTimer >= 1.0) {
-                camera.keys.up = true;
-                viewChanged();
-            }
-
-            // Check gamepad state
-            const float deadZone = 0.0015f;
-            // todo : check if gamepad is present
-            // todo : time based and relative axis positions
-            if (camera.type != Camera::CameraType::firstperson) {
-                // Rotate
-                if (std::abs(gamePadState.axisLeft.x) > deadZone) {
-                    rotation.y += gamePadState.axisLeft.x * 0.5f * rotationSpeed;
-                    camera.rotate(glm::vec3(0.0f, gamePadState.axisLeft.x * 0.5f, 0.0f));
-                    updateView = true;
-                }
-                if (std::abs(gamePadState.axisLeft.y) > deadZone) {
-                    rotation.x -= gamePadState.axisLeft.y * 0.5f * rotationSpeed;
-                    camera.rotate(glm::vec3(gamePadState.axisLeft.y * 0.5f, 0.0f, 0.0f));
-                    updateView = true;
-                }
-                // Zoom
-                if (std::abs(gamePadState.axisRight.y) > deadZone) {
-                    zoom -= gamePadState.axisRight.y * 0.01f * zoomSpeed;
-                    updateView = true;
-                }
-                if (updateView) {
-                    viewChanged();
-                }
-            } else {
-                updateView = camera.updatePad(gamePadState.axisLeft, gamePadState.axisRight, frameDeltaTime);
-                if (updateView) {
-                    viewChanged();
-                }
             }
         }
     }
@@ -859,41 +820,9 @@ void VulkanFramework::handleMessages(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
             PostQuitMessage(0);
             break;
         }
-        if (camera.firstperson) {
-            switch (wParam) {
-            case KEY_W:
-                camera.keys.up = true;
-                break;
-            case KEY_S:
-                camera.keys.down = true;
-                break;
-            case KEY_A:
-                camera.keys.left = true;
-                break;
-            case KEY_D:
-                camera.keys.right = true;
-                break;
-            }
-        }
         keyPressed((uint32_t)wParam);
         break;
     case WM_KEYUP:
-        if (camera.firstperson) {
-            switch (wParam) {
-            case KEY_W:
-                camera.keys.up = false;
-                break;
-            case KEY_S:
-                camera.keys.down = false;
-                break;
-            case KEY_A:
-                camera.keys.left = false;
-                break;
-            case KEY_D:
-                camera.keys.right = false;
-                break;
-            }
-        }
         break;
     case WM_LBUTTONDOWN:
         mousePos = glm::vec2((float)LOWORD(lParam), (float)HIWORD(lParam));
@@ -918,9 +847,6 @@ void VulkanFramework::handleMessages(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
         break;
     case WM_MOUSEWHEEL: {
         short wheelDelta = GET_WHEEL_DELTA_WPARAM(wParam);
-        zoom += (float)wheelDelta * 0.005f * zoomSpeed;
-        camera.translate(glm::vec3(0.0f, 0.0f, (float)wheelDelta * 0.005f * zoomSpeed));
-        viewUpdated = true;
         break;
     }
     case WM_MOUSEMOVE: {
@@ -1326,10 +1252,6 @@ void VulkanFramework::windowResize()
 
     vkDeviceWaitIdle(device);
 
-    if ((width > 0.0f) && (height > 0.0f)) {
-        camera.updateAspectRatio((float)width / (float)height);
-    }
-
     // Notify derived class
     windowResized();
     viewChanged();
@@ -1353,24 +1275,6 @@ void VulkanFramework::handleMouseMove(int32_t x, int32_t y)
     if (handled) {
         mousePos = glm::vec2((float)x, (float)y);
         return;
-    }
-
-    if (mouseButtons.left) {
-        rotation.x += dy * 1.25f * rotationSpeed;
-        rotation.y -= dx * 1.25f * rotationSpeed;
-        camera.rotate(glm::vec3(dy * camera.rotationSpeed, -dx * camera.rotationSpeed, 0.0f));
-        viewUpdated = true;
-    }
-    if (mouseButtons.right) {
-        zoom += dy * .005f * zoomSpeed;
-        camera.translate(glm::vec3(-0.0f, 0.0f, dy * .005f * zoomSpeed));
-        viewUpdated = true;
-    }
-    if (mouseButtons.middle) {
-        cameraPos.x -= dx * 0.01f;
-        cameraPos.y -= dy * 0.01f;
-        camera.translate(glm::vec3(-dx * 0.01f, -dy * 0.01f, 0.0f));
-        viewUpdated = true;
     }
     mousePos = glm::vec2((float)x, (float)y);
 }
